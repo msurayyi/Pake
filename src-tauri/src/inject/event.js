@@ -1382,7 +1382,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // deliberately narrow -- one shot, time-limited, and cancelled by any in-page
   // interaction -- because it cannot tell a notification click apart from the
   // user switching back by hand.
-  const FOCUS_CLICK_WINDOW_MS = 60000;
+  const FOCUS_CLICK_WINDOW_MS = 0;
   const MAX_TRACKED_NOTIFICATIONS = 200;
   const liveNotifications = new Map();
   let notifSeq = 0;
