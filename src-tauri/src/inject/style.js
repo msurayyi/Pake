@@ -1,9 +1,6 @@
 window.addEventListener("DOMContentLoaded", (_event) => {
   // Applies to every app.
   const globalContentCSS = `
-    html::-webkit-scrollbar {
-      display: none !important;
-    }
   `;
 
   // Window drag strip shared by every immersive header.
