@@ -1002,7 +1002,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyAddress: isChinese ? "复制地址" : "Copy Address",
     openInBrowser: isChinese ? "浏览器打开" : "Open in Browser",
     searchGoogle: "البحث في Google",
-    copyText: "نسخ",    
+    copyText: "نسخ",
   };
 
   // Menu theme configuration
@@ -1260,7 +1260,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ),
         );
         break;
-        
+
       case "link":
         if (data.isFile) {
           items.push(
@@ -1302,9 +1302,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const selectedText = (window.getSelection?.()?.toString() || "").trim();
       const isSelection =
-        selectedText !== "" &&
-        !mediaInfo.isMedia &&
-        !isEditableElement(target);
+        selectedText !== "" && !mediaInfo.isMedia && !isEditableElement(target);
 
       // Only show custom menu for media, links or selected text
       if (mediaInfo.isMedia || isLink || isSelection) {
