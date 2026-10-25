@@ -1001,6 +1001,8 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadFile: isChinese ? "下载文件" : "Download File",
     copyAddress: isChinese ? "复制地址" : "Copy Address",
     openInBrowser: isChinese ? "浏览器打开" : "Open in Browser",
+    searchGoogle: "البحث في Google",
+    copyText: "نسخ",    
   };
 
   // Menu theme configuration
@@ -1244,6 +1246,21 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         break;
 
+      case "selection":
+        items.push(
+          createMenuItem(menuTexts.searchGoogle, () =>
+            invoke("plugin:shell|open", {
+              path:
+                "https://www.google.com/search?q=" +
+                encodeURIComponent(data.text.slice(0, 500)),
+            }),
+          ),
+          createMenuItem(menuTexts.copyText, () =>
+            navigator.clipboard.writeText(data.text),
+          ),
+        );
+        break;
+        
       case "link":
         if (data.isFile) {
           items.push(
@@ -1283,8 +1300,14 @@ document.addEventListener("DOMContentLoaded", () => {
           : null;
       const isLink = linkElement && linkElement.href && !mediaInfo.isMedia;
 
-      // Only show custom menu for media or links
-      if (mediaInfo.isMedia || isLink) {
+      const selectedText = (window.getSelection?.()?.toString() || "").trim();
+      const isSelection =
+        selectedText !== "" &&
+        !mediaInfo.isMedia &&
+        !isEditableElement(target);
+
+      // Only show custom menu for media, links or selected text
+      if (mediaInfo.isMedia || isLink || isSelection) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -1292,6 +1315,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (mediaInfo.isMedia) {
           menuItems = buildMenuItems("media", mediaInfo);
+        } else if (isSelection) {
+          menuItems = buildMenuItems("selection", { text: selectedText });
         } else if (isLink) {
           const linkUrl = linkElement.href;
           menuItems = buildMenuItems("link", {
