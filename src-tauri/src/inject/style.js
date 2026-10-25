@@ -38,6 +38,15 @@ window.addEventListener("DOMContentLoaded", (_event) => {
       `,
     },
     {
+      hosts: ["x.com", "twitter.com"],
+      content: `
+        #react-root [data-testid="placementTracking"] article,
+        #react-root a[href*="quick_promote_web"] {
+          display: none !important;
+        }
+      `,
+    },
+    {
       hosts: ["grok.com"],
       immersive: `
         .flex.w-full.h-full.overflow-hidden{
